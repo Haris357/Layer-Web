@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { Shell } from '../components/Shell'
 
-// Screenshot tile that falls back to a labelled placeholder until a real
-// image is dropped into /public/demo.
+// Screenshot tile that falls back to a labelled placeholder if it can't load.
 function Shot({ src, label }: { src: string; label: string }) {
   const [ok, setOk] = useState(true)
   if (!ok) return <div className="shot">{label}</div>
@@ -17,8 +16,6 @@ function Shot({ src, label }: { src: string; label: string }) {
 }
 
 export function Demo() {
-  const [videoOk, setVideoOk] = useState(true)
-
   return (
     <Shell>
       <div className="demo">
@@ -26,21 +23,13 @@ export function Demo() {
         <h1 className="display sm">Layer, in motion.</h1>
 
         <div className="demo-video">
-          {videoOk ? (
-            <video
-              src="/demo/walkthrough.mp4"
-              poster="/demo/poster.jpg"
-              controls
-              playsInline
-              preload="metadata"
-              onError={() => setVideoOk(false)}
-            />
-          ) : (
-            <div className="demo-placeholder">
-              <img src="/layer-icon.svg" width={40} height={40} alt="" />
-              <span>Walkthrough video coming soon</span>
-            </div>
-          )}
+          <video
+            src="/demo/walkthrough.mp4"
+            poster="/demo/poster.jpg"
+            controls
+            playsInline
+            preload="metadata"
+          />
         </div>
 
         <div className="demo-shots">
