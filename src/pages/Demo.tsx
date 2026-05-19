@@ -29,9 +29,10 @@ export function Demo() {
           {videoOk ? (
             <video
               src="/demo/walkthrough.mp4"
-              poster="/demo/poster.png"
+              poster="/demo/poster.jpg"
               controls
               playsInline
+              preload="metadata"
               onError={() => setVideoOk(false)}
             />
           ) : (
@@ -43,9 +44,9 @@ export function Demo() {
         </div>
 
         <div className="demo-shots">
-          <Shot src="/demo/shot-1.png" label="Canvas" />
-          <Shot src="/demo/shot-2.png" label="Widgets" />
-          <Shot src="/demo/shot-3.png" label="Journal" />
+          <Shot src="/demo/fullscreen.png" label="Fullscreen" />
+          <Shot src="/demo/media.png" label="Media widget" />
+          <Shot src="/demo/notes.png" label="Notes" />
         </div>
       </div>
     </Shell>
