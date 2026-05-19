@@ -335,6 +335,86 @@ a {
   font-size: 12px;
 }
 
+/* ---------- template gallery ---------- */
+.gallery {
+  width: 100%;
+  max-width: 980px;
+  text-align: center;
+}
+.tpl-grid {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.tpl-card {
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 12px;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+.tpl-card:hover {
+  border-color: #d8d8d8;
+  transform: translateY(-2px);
+}
+.tpl-canvas {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  background: #fafafa;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  overflow: hidden;
+}
+.tpl-frame {
+  position: relative;
+}
+.tpl-widget {
+  position: absolute;
+  background: #fff;
+  border: 1px solid #e4e4e6;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.tpl-widget span {
+  font-size: 8.5px;
+  font-weight: 500;
+  color: #9a9aa0;
+  white-space: nowrap;
+  padding: 0 4px;
+}
+.tpl-meta {
+  padding: 11px 4px 3px;
+}
+.tpl-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+}
+.tpl-name span {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--faint);
+}
+.tpl-desc {
+  margin-top: 3px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
 /* ---------- responsive ---------- */
 @media (max-width: 680px) {
   .display {

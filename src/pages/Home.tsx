@@ -90,8 +90,15 @@ export function Home() {
         <DownloadCount />
 
         <div className="note" style={{ marginTop: 8 }}>
+          <Link
+            to="/templates"
+            style={{ color: 'var(--muted)', fontWeight: 500 }}
+          >
+            browse templates
+          </Link>
+          <span style={{ margin: '0 8px' }}>·</span>
           <Link to="/demo" style={{ color: 'var(--muted)', fontWeight: 500 }}>
-            or watch a quick demo →
+            watch a quick demo
           </Link>
         </div>
       </div>

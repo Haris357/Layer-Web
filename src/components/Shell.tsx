@@ -64,6 +64,7 @@ export function Shell({ children }: { children: ReactNode }) {
           </span>
         </div>
         <div className="foot-right">
+          <Link to="/templates">Templates</Link>
           <Link to="/terms">Terms</Link>
           <Link to="/docs">Docs</Link>
         </div>
