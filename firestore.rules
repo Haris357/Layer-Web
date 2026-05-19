@@ -4,12 +4,35 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     // Website visitors may only add an email to the download list.
-    // Nothing in the database can be read or modified from the client.
     match /emails/{doc} {
       allow create: if request.resource.data.email is string
                     && request.resource.data.email.size() > 3
                     && request.resource.data.email.size() < 200;
       allow read, update, delete: if false;
+    }
+
+    // Public template gallery.
+    match /templates/{id} {
+      allow read: if true;
+
+      // Anyone may publish a template (open gallery). Shape is validated;
+      // vote counts must start at zero.
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.name.size() < 80
+                    && request.resource.data.widgets is list
+                    && request.resource.data.widgets.size() > 0
+                    && request.resource.data.thumb is string
+                    && request.resource.data.upvotes == 0
+                    && request.resource.data.downvotes == 0
+                    && request.resource.data.score == 0;
+
+      // Updates are limited to vote counters only — content can't be altered.
+      allow update: if request.resource.data.diff(resource.data)
+                      .affectedKeys()
+                      .hasOnly(['upvotes', 'downvotes', 'score']);
+
+      allow delete: if false;
     }
 
     match /{document=**} {

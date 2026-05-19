@@ -4,7 +4,14 @@ import { LINKS } from '../lib/links'
 import { GitHubIcon, LinkedInIcon, XIcon } from './icons'
 
 // Shared page frame: top-left logo + fixed footer, content in the middle.
-export function Shell({ children }: { children: ReactNode }) {
+// Pass `scroll` for long pages (the gallery) so the middle region scrolls.
+export function Shell({
+  children,
+  scroll = false,
+}: {
+  children: ReactNode
+  scroll?: boolean
+}) {
   return (
     <div className="page">
       <Link to="/" className="logo">
@@ -12,7 +19,9 @@ export function Shell({ children }: { children: ReactNode }) {
         <span>Layer</span>
       </Link>
 
-      <main className="content">{children}</main>
+      <main className={scroll ? 'content content-scroll' : 'content'}>
+        {children}
+      </main>
 
       <footer className="footer">
         <div className="foot-left">

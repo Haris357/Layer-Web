@@ -25,6 +25,22 @@ export function XIcon({ size = 16 }: IconProps) {
   )
 }
 
+export function CaretUpIcon({ size = 16 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 7.5l7 9H5z" />
+    </svg>
+  )
+}
+
+export function CaretDownIcon({ size = 16 }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 16.5l-7-9h14z" />
+    </svg>
+  )
+}
+
 export function DownloadIcon({ size = 16 }: IconProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
