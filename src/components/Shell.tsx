@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { LINKS } from '../lib/links'
+import { GitHubIcon, LinkedInIcon, XIcon } from './icons'
 
 // Shared page frame: top-left logo + fixed footer, content in the middle.
 export function Shell({ children }: { children: ReactNode }) {
@@ -15,8 +16,14 @@ export function Shell({ children }: { children: ReactNode }) {
 
       <footer className="footer">
         <div className="foot-left">
-          <a href={LINKS.repo} target="_blank" rel="noreferrer">
-            GitHub
+          <a
+            href={LINKS.repo}
+            target="_blank"
+            rel="noreferrer"
+            className="ico"
+            title="Layer on GitHub"
+          >
+            <GitHubIcon size={17} />
           </a>
         </div>
         <div className="foot-center">
@@ -27,14 +34,32 @@ export function Shell({ children }: { children: ReactNode }) {
             </a>
           </span>
           <span className="socials">
-            <a href={LINKS.haris.linkedin} target="_blank" rel="noreferrer">
-              LinkedIn
+            <a
+              href={LINKS.haris.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="ico"
+              title="LinkedIn"
+            >
+              <LinkedInIcon size={15} />
             </a>
-            <a href={LINKS.haris.github} target="_blank" rel="noreferrer">
-              GitHub
+            <a
+              href={LINKS.haris.github}
+              target="_blank"
+              rel="noreferrer"
+              className="ico"
+              title="GitHub"
+            >
+              <GitHubIcon size={15} />
             </a>
-            <a href={LINKS.haris.twitter} target="_blank" rel="noreferrer">
-              X
+            <a
+              href={LINKS.haris.twitter}
+              target="_blank"
+              rel="noreferrer"
+              className="ico"
+              title="X"
+            >
+              <XIcon size={14} />
             </a>
           </span>
         </div>

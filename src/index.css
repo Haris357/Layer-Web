@@ -72,13 +72,12 @@ a {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 62px;
+  height: 50px;
   display: flex;
   align-items: center;
-  padding: 0 28px;
-  border-top: 1px solid var(--line);
+  padding: 0 26px;
   background: var(--bg);
-  font-size: 13.5px;
+  font-size: 12.5px;
   color: var(--faint);
 }
 .footer a {
@@ -86,6 +85,14 @@ a {
   transition: color 0.15s ease;
 }
 .footer a:hover {
+  color: var(--ink);
+}
+.footer .ico {
+  display: inline-flex;
+  align-items: center;
+  color: var(--faint);
+}
+.footer .ico:hover {
   color: var(--ink);
 }
 .foot-left {
@@ -217,6 +224,38 @@ a {
 }
 .note.ok {
   color: #2c8a4a;
+}
+
+/* ---------- downloads counter ---------- */
+.dlcount {
+  margin-top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  color: var(--faint);
+}
+.dlcount strong {
+  color: var(--muted);
+  font-weight: 600;
+}
+.dlcount .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2c8a4a;
+  animation: dlpulse 2s infinite;
+}
+@keyframes dlpulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(44, 138, 74, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(44, 138, 74, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(44, 138, 74, 0);
+  }
 }
 
 /* ---------- docs / terms ---------- */

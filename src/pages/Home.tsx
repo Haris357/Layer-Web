@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { Shell } from '../components/Shell'
+import { DownloadCount } from '../components/DownloadCount'
 import { db } from '../lib/firebase'
 import { LINKS } from '../lib/links'
 
@@ -85,6 +86,8 @@ export function Home() {
             ? msg.text
             : 'for Windows 10 & 11 · free · no account needed'}
         </div>
+
+        <DownloadCount />
 
         <div className="note" style={{ marginTop: 8 }}>
           <Link to="/demo" style={{ color: 'var(--muted)', fontWeight: 500 }}>
