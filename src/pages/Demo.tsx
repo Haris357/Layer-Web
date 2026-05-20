@@ -19,7 +19,7 @@ const SECTIONS: Section[] = [
       'Drop notes, clocks, weather, system stats, calendars and more onto your desktop. Drag them anywhere, snap to a grid, lock them when you have it just right — they sit quietly behind your apps until you need them.',
     media: {
       kind: 'image',
-      src: '/demo/fullscreen.png',
+      src: '/demo/poster.png',
       alt: 'A full Layer canvas of widgets on the desktop',
     },
   },
