@@ -1,5 +1,5 @@
+import { Link } from 'react-router-dom'
 import { Shell } from '../components/Shell'
-import { LINKS } from '../lib/links'
 
 interface Section {
   eyebrow: string
@@ -107,9 +107,9 @@ export function Demo() {
         <div className="demo-cta">
           <h2 className="display sm">Yours in a minute.</h2>
           <p className="lead">Free, no account, Windows 10 &amp; 11.</p>
-          <a className="demo-dl" href={LINKS.download}>
+          <Link className="demo-dl" to="/?download=1">
             Download Layer
-          </a>
+          </Link>
         </div>
       </div>
     </Shell>
