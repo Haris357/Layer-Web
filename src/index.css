@@ -560,6 +560,131 @@ a {
   margin-top: 8px;
 }
 
+/* ---------- changelog ---------- */
+.ch {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+.ch-head {
+  text-align: center;
+  margin-bottom: 36px;
+}
+.ch-head .lead {
+  margin-bottom: 0;
+}
+.ch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.ch-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 22px 24px;
+  transition: border-color 0.15s ease;
+}
+.ch-card:hover {
+  border-color: #d8d8d8;
+}
+.ch-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.ch-version {
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+  color: var(--ink);
+}
+.ch-date {
+  font-size: 12px;
+  color: var(--faint);
+}
+.ch-name {
+  margin: 4px 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.ch-body h2,
+.ch-body h3,
+.ch-body h4 {
+  color: var(--ink);
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  margin-top: 18px;
+  margin-bottom: 6px;
+}
+.ch-body h2 {
+  font-size: 15px;
+}
+.ch-body h3 {
+  font-size: 13.5px;
+  color: var(--muted);
+  text-transform: none;
+}
+.ch-body h4 {
+  font-size: 12.5px;
+  color: var(--faint);
+}
+.ch-body p {
+  margin: 0 0 8px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.ch-body ul {
+  margin: 0 0 12px;
+  padding-left: 20px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+.ch-body li {
+  margin: 2px 0;
+}
+.ch-body strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.ch-body em {
+  font-style: italic;
+}
+.ch-body code {
+  background: #f3f3f4;
+  padding: 1px 6px;
+  border-radius: 5px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 12.5px;
+  color: var(--ink);
+}
+.ch-body a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.ch-source {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--faint);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.ch-source:hover {
+  color: var(--ink);
+}
+.ch-state {
+  text-align: center;
+  padding: 60px 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 /* ---------- responsive ---------- */
 @media (max-width: 680px) {
   .display {
