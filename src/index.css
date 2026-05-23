@@ -60,10 +60,19 @@ a {
 
 .content {
   flex: 1;
+  min-height: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  overflow-y: auto;
   padding: 100px 28px;
+}
+/* Auto block-margins center the content vertically but, unlike
+   justify-content:center, stay scroll-safe — when the content is taller
+   than the viewport (short screens) it scrolls instead of being clipped.
+   Has no effect on .content-scroll (display:block, margins collapse to 0). */
+.content > * {
+  margin-block: auto;
 }
 
 /* ---------- footer ---------- */
