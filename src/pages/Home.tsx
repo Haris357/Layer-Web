@@ -3,7 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { Shell } from '../components/Shell'
 import { DownloadCount } from '../components/DownloadCount'
-import { db } from '../lib/firebase'
+import { db, countDownloadOnce } from '../lib/firebase'
 import { LINKS } from '../lib/links'
 import { isValidEmail, suggestEmail } from '../lib/email'
 
@@ -86,6 +86,10 @@ export function Home() {
     } catch {
       /* ignore */
     }
+
+    // Bump the public download counter once per browser (never auto-updates,
+    // never the same person twice). Best effort — fire and forget.
+    void countDownloadOnce()
 
     // Start the installer download.
     window.location.href = LINKS.download

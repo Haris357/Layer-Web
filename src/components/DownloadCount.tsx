@@ -1,49 +1,26 @@
 import { useEffect, useRef, useState } from 'react'
+import { onSnapshot } from 'firebase/firestore'
 import { DownloadIcon } from './icons'
-
-const RELEASES_API =
-  'https://api.github.com/repos/Haris357/Layer-releases/releases'
-
-// Real download total = sum of every release installer's GitHub download_count.
-async function fetchDownloads(): Promise<number | null> {
-  try {
-    const res = await fetch(RELEASES_API)
-    if (!res.ok) return null
-    const releases: Array<{
-      assets?: Array<{ name: string; download_count: number }>
-    }> = await res.json()
-    let total = 0
-    for (const rel of releases) {
-      for (const asset of rel.assets ?? []) {
-        if (asset.name.toLowerCase().endsWith('.exe')) {
-          total += asset.download_count ?? 0
-        }
-      }
-    }
-    return total
-  } catch {
-    return null
-  }
-}
+import { downloadsDoc } from '../lib/firebase'
 
 export function DownloadCount() {
   const [count, setCount] = useState<number | null>(null)
   const [shown, setShown] = useState(0)
   const raf = useRef(0)
 
-  // Fetch on mount, then refresh every 5 minutes.
+  // Live subscription to the shared counter — counts genuine first-time
+  // downloads only (not auto-updates or repeat downloads), so it updates the
+  // instant anyone grabs Layer.
   useEffect(() => {
-    let alive = true
-    const load = () =>
-      fetchDownloads().then((n) => {
-        if (alive && n !== null) setCount(n)
-      })
-    load()
-    const id = window.setInterval(load, 5 * 60 * 1000)
-    return () => {
-      alive = false
-      window.clearInterval(id)
-    }
+    const unsub = onSnapshot(
+      downloadsDoc,
+      (snap) => {
+        const n = snap.data()?.count
+        if (typeof n === 'number') setCount(n)
+      },
+      () => {},
+    )
+    return unsub
   }, [])
 
   // Count up toward the latest real number whenever it changes.

@@ -13,6 +13,23 @@ service cloud.firestore {
       allow read, update, delete: if false;
     }
 
+    // Public download counter — one shared doc the site reads live and
+    // bumps by exactly one per genuine first-time download (deduped client
+    // side). Unlike GitHub's asset download_count, this never counts auto
+    // updates or the same person re-downloading.
+    match /stats/downloads {
+      allow read: if true;
+      // Seed once (create only fires when the doc doesn't exist yet).
+      allow create: if request.resource.data.keys().hasOnly(['count'])
+                    && request.resource.data.count is int
+                    && request.resource.data.count >= 0;
+      // Increment-by-one only — no decrements, no other fields.
+      allow update: if request.resource.data.diff(resource.data)
+                         .affectedKeys().hasOnly(['count'])
+                    && request.resource.data.count == resource.data.count + 1;
+      allow delete: if false;
+    }
+
     // Public template gallery.
     match /templates/{id} {
       allow read: if true;
