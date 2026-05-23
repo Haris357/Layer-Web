@@ -5,8 +5,7 @@ import { Shell } from '../components/Shell'
 import { DownloadCount } from '../components/DownloadCount'
 import { db } from '../lib/firebase'
 import { LINKS } from '../lib/links'
-
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+import { isValidEmail, suggestEmail } from '../lib/email'
 
 type Msg = { kind: 'error' | 'ok'; text: string }
 
@@ -36,10 +35,14 @@ export function Home() {
     }
   }, [searchParams])
 
+  const valid = isValidEmail(email)
+  const suggestion = valid ? null : suggestEmail(email)
+
   const onDownload = async () => {
     const value = email.trim()
-    if (!EMAIL_RE.test(value)) {
+    if (!isValidEmail(value)) {
       setMsg({ kind: 'error', text: 'Please enter a valid email address.' })
+      inputRef.current?.focus()
       return
     }
     setBusy(true)
@@ -98,16 +101,38 @@ export function Home() {
               if (e.key === 'Enter' && !busy) onDownload()
             }}
           />
-          <button type="button" onClick={onDownload} disabled={busy}>
+          <button
+            type="button"
+            onClick={onDownload}
+            disabled={busy || !valid}
+          >
             {busy ? 'preparing…' : 'download'}
           </button>
         </div>
 
-        <div className={`note ${msg?.kind ?? ''}`}>
-          {msg
-            ? msg.text
-            : 'for Windows 10 & 11 · free · no account needed'}
-        </div>
+        {suggestion ? (
+          <div className="note">
+            did you mean{' '}
+            <button
+              type="button"
+              onClick={() => setEmail(suggestion)}
+              style={{
+                color: 'var(--ink)',
+                fontWeight: 600,
+                textDecoration: 'underline',
+              }}
+            >
+              {suggestion}
+            </button>
+            ?
+          </div>
+        ) : (
+          <div className={`note ${msg?.kind ?? ''}`}>
+            {msg
+              ? msg.text
+              : 'for Windows 10 & 11 · free · no account needed'}
+          </div>
+        )}
 
         <DownloadCount />
 

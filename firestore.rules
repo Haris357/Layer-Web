@@ -6,8 +6,10 @@ service cloud.firestore {
     // Website visitors may only add an email to the download list.
     match /emails/{doc} {
       allow create: if request.resource.data.email is string
-                    && request.resource.data.email.size() > 3
-                    && request.resource.data.email.size() < 200;
+                    && request.resource.data.email.size() >= 6
+                    && request.resource.data.email.size() < 254
+                    && request.resource.data.email
+                         .matches('^[^@\\s]+@[^@\\s]+[.][a-zA-Z]{2,}$');
       allow read, update, delete: if false;
     }
 

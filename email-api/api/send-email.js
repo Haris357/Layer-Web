@@ -1,7 +1,18 @@
 const nodemailer = require('nodemailer')
 const { welcomeEmail } = require('./_template')
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const EMAIL_RE =
+  /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/
+
+function validEmail(e) {
+  return (
+    typeof e === 'string' &&
+    e.length >= 6 &&
+    e.length <= 254 &&
+    EMAIL_RE.test(e) &&
+    /^[a-zA-Z]{2,}$/.test(e.slice(e.lastIndexOf('.') + 1))
+  )
+}
 
 // Vercel serverless function — POST { email } sends the welcome email.
 module.exports = async (req, res) => {
@@ -23,7 +34,7 @@ module.exports = async (req, res) => {
     email = ''
   }
 
-  if (!EMAIL_RE.test(email)) {
+  if (!validEmail(email)) {
     return res.status(400).json({ error: 'Invalid email' })
   }
 
