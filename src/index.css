@@ -385,6 +385,33 @@ a {
   object-fit: cover;
 }
 
+/* Full-width screensaver showcase — same prominence as the hero video. */
+.demo-showcase {
+  text-align: center;
+  margin-bottom: 110px;
+}
+.demo-showcase .label {
+  margin-bottom: 14px;
+}
+.demo-showcase .lead {
+  margin: 16px auto 32px;
+  max-width: 600px;
+}
+.demo-shot {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: #0b0b10;
+  box-shadow: 0 24px 60px -22px rgba(0, 0, 0, 0.35);
+}
+.demo-shot img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
 .demo-cta {
   text-align: center;
   padding: 70px 0 30px;
@@ -414,6 +441,9 @@ a {
 @media (max-width: 760px) {
   .demo-sections {
     gap: 70px;
+    margin-bottom: 80px;
+  }
+  .demo-showcase {
     margin-bottom: 80px;
   }
   .demo-row,

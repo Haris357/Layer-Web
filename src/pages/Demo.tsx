@@ -104,6 +104,24 @@ export function Demo() {
           ))}
         </div>
 
+        <section className="demo-showcase">
+          <div className="label">EVEN WHEN YOU STEP AWAY</div>
+          <h2 className="display sm">A screensaver, too.</h2>
+          <p className="lead">
+            Leave your machine for a bit and Layer becomes a calm, full-screen
+            screensaver — a big clock, the date, your local weather, and
+            whatever’s playing, drifting over a soft ambient backdrop. It sets
+            itself up automatically, and a tap of any key brings you back.
+          </p>
+          <div className="demo-shot">
+            <img
+              src="/screensaver.png"
+              alt="The Layer screensaver — clock, date, local weather and now playing over an ambient backdrop"
+              loading="lazy"
+            />
+          </div>
+        </section>
+
         <div className="demo-cta">
           <h2 className="display sm">Yours in a minute.</h2>
           <p className="lead">Free, no account, Windows 10 &amp; 11.</p>
