@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer')
+const dns = require('dns').promises
 const { welcomeEmail } = require('./_template')
 
 const EMAIL_RE =
@@ -12,6 +13,24 @@ function validEmail(e) {
     EMAIL_RE.test(e) &&
     /^[a-zA-Z]{2,}$/.test(e.slice(e.lastIndexOf('.') + 1))
   )
+}
+
+// Confirms the domain can actually receive mail — MX records (or an A/AAAA
+// fallback). Catches valid-looking-but-fake domains like x.xx.
+async function deliverable(email) {
+  const domain = email.slice(email.lastIndexOf('@') + 1).toLowerCase()
+  try {
+    const mx = await dns.resolveMx(domain)
+    if (Array.isArray(mx) && mx.some((r) => r.exchange)) return true
+  } catch {
+    /* fall through to A-record check */
+  }
+  try {
+    const a = await dns.resolve(domain)
+    return Array.isArray(a) && a.length > 0
+  } catch {
+    return false
+  }
 }
 
 // Vercel serverless function — POST { email } sends the welcome email.
@@ -35,7 +54,11 @@ module.exports = async (req, res) => {
   }
 
   if (!validEmail(email)) {
-    return res.status(400).json({ error: 'Invalid email' })
+    return res.status(400).json({ error: 'invalid', reason: 'format' })
+  }
+
+  if (!(await deliverable(email))) {
+    return res.status(400).json({ error: 'invalid', reason: 'undeliverable' })
   }
 
   const user = process.env.SMTP_USER

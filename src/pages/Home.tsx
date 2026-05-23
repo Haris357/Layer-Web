@@ -46,7 +46,34 @@ export function Home() {
       return
     }
     setBusy(true)
-    setMsg(null)
+    setMsg({ kind: 'ok', text: 'checking your email…' })
+
+    // Verify the email is real + deliverable (server does an MX lookup) and
+    // send the welcome mail in the same call. A 400 means the address can't
+    // receive mail — block the download. Any other outcome (success, our
+    // server erroring, or being unreachable) lets the user through so our
+    // downtime never blocks a legit download.
+    const api = import.meta.env.VITE_EMAIL_API_URL
+    if (api) {
+      try {
+        const res = await fetch(`${api}/api/send-email`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: value }),
+        })
+        if (res.status === 400) {
+          setBusy(false)
+          setMsg({
+            kind: 'error',
+            text: "That email can’t receive mail — double-check the address.",
+          })
+          inputRef.current?.focus()
+          return
+        }
+      } catch {
+        /* network/our problem — let the download proceed */
+      }
+    }
 
     // Store the email — best effort, never blocks the download.
     try {
@@ -58,16 +85,6 @@ export function Home() {
       })
     } catch {
       /* ignore */
-    }
-
-    // Fire off the welcome email without waiting on it.
-    const api = import.meta.env.VITE_EMAIL_API_URL
-    if (api) {
-      fetch(`${api}/api/send-email`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: value }),
-      }).catch(() => {})
     }
 
     // Start the installer download.

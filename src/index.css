@@ -779,15 +779,26 @@ a {
 
 /* ---------- responsive ---------- */
 @media (max-width: 680px) {
+  .logo {
+    top: 16px;
+    left: 18px;
+    font-size: 16px;
+  }
+  .content {
+    padding: 80px 20px 96px;
+  }
+  .content-scroll {
+    padding: 80px 18px 96px;
+  }
   .display {
-    font-size: 36px;
-    letter-spacing: -1.4px;
+    font-size: 34px;
+    letter-spacing: -1.3px;
   }
   .display.sm {
-    font-size: 28px;
+    font-size: 26px;
   }
   .lead {
-    font-size: 17px;
+    font-size: 16px;
   }
   .signup {
     flex-direction: column;
@@ -797,12 +808,59 @@ a {
     width: 100%;
     max-width: 320px;
   }
+  .signup button {
+    width: 100%;
+    max-width: 320px;
+  }
   .sections {
     grid-template-columns: 1fr;
     gap: 14px;
   }
+  .gx-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+  }
+  .ch-card {
+    padding: 18px 16px;
+  }
+  .ch-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  /* Footer wraps + centers on small screens instead of overflowing. */
+  .footer {
+    height: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 14px;
+    padding: 9px 14px;
+    font-size: 11.5px;
+    line-height: 1.4;
+  }
+  .foot-left,
+  .foot-center,
+  .foot-right {
+    flex: 0 0 auto;
+  }
+  .foot-center {
+    gap: 10px;
+  }
   .foot-center .socials {
     display: none;
+  }
+  .foot-right {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 380px) {
+  .gx-grid {
+    grid-template-columns: 1fr;
+  }
+  .foot-right {
+    gap: 11px;
   }
 }
 
@@ -811,6 +869,6 @@ a {
     font-size: 38px;
   }
   .content {
-    padding: 84px 28px;
+    padding: 84px 28px 90px;
   }
 }
