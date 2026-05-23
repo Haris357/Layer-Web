@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 import { Shell } from '../components/Shell'
 import { DownloadCount } from '../components/DownloadCount'
 import { db, countDownloadOnce } from '../lib/firebase'
@@ -75,16 +75,19 @@ export function Home() {
       }
     }
 
-    // Store the email — best effort, never blocks the download.
+    // Store the email keyed by the address itself, so the same person never
+    // creates a duplicate doc — they stay a single entry on the list (and
+    // still get every email I send). Best effort, never blocks the download.
     try {
-      await addDoc(collection(db, 'emails'), {
+      const id = encodeURIComponent(value.toLowerCase())
+      await setDoc(doc(db, 'emails', id), {
         email: value,
         createdAt: serverTimestamp(),
         platform: 'windows',
         source: 'website',
       })
     } catch {
-      /* ignore */
+      /* already on the list, or offline — either way, carry on */
     }
 
     // Bump the public download counter once per browser (never auto-updates,
