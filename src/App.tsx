@@ -1,7 +1,7 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { Demo } from './pages/Demo'
-import { Templates } from './pages/Templates'
+import { Spaces } from './pages/Spaces'
 import { Changelog } from './pages/Changelog'
 import { Terms } from './pages/Terms'
 import { Docs } from './pages/Docs'
@@ -11,7 +11,9 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/demo" element={<Demo />} />
-      <Route path="/templates" element={<Templates />} />
+      <Route path="/spaces" element={<Spaces />} />
+      {/* keep old links working */}
+      <Route path="/templates" element={<Navigate to="/spaces" replace />} />
       <Route path="/changelog" element={<Changelog />} />
       <Route path="/terms" element={<Terms />} />
       <Route path="/docs" element={<Docs />} />

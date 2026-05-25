@@ -162,10 +162,10 @@ export function Home() {
 
         <div className="note" style={{ marginTop: 8 }}>
           <Link
-            to="/templates"
+            to="/spaces"
             style={{ color: 'var(--muted)', fontWeight: 500 }}
           >
-            browse templates
+            browse spaces
           </Link>
           <span style={{ margin: '0 8px' }}>·</span>
           <Link to="/demo" style={{ color: 'var(--muted)', fontWeight: 500 }}>
