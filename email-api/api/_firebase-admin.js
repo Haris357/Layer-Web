@@ -11,8 +11,14 @@ function ensure() {
   if (!admin.apps.length) {
     const raw = process.env.FIREBASE_SERVICE_ACCOUNT
     if (!raw) throw new Error('FIREBASE_SERVICE_ACCOUNT is not set')
+    // Accept either the raw JSON or a base64-encoded blob. Base64 is the
+    // recommended form for env UIs (one line, no quotes/newlines to mangle).
+    let json = raw.trim()
+    if (!json.startsWith('{')) {
+      json = Buffer.from(json, 'base64').toString('utf8')
+    }
     admin.initializeApp({
-      credential: admin.cert(JSON.parse(raw)),
+      credential: admin.cert(JSON.parse(json)),
     })
   }
   initialized = true
