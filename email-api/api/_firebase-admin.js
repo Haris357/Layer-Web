@@ -25,7 +25,7 @@ function ensure() {
       cred.private_key = cred.private_key.replace(/\\n/g, '\n')
     }
     admin.initializeApp({
-      credential: admin.cert(cred),
+      credential: admin.credential.cert(cred),
     })
   }
   initialized = true
