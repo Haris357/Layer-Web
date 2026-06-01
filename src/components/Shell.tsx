@@ -19,6 +19,13 @@ export function Shell({
         <span>Layer</span>
       </Link>
 
+      <nav className="topnav">
+        <Link to="/spaces">Spaces</Link>
+        <Link to="/download" className="topnav-dl">
+          Download
+        </Link>
+      </nav>
+
       <main className={scroll ? 'content content-scroll' : 'content'}>
         {children}
       </main>
@@ -73,7 +80,6 @@ export function Shell({
           </span>
         </div>
         <div className="foot-right">
-          <Link to="/spaces">Spaces</Link>
           <Link to="/changelog">Changelog</Link>
           <Link to="/terms">Terms</Link>
           <Link to="/docs">Docs</Link>

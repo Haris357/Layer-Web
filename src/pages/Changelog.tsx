@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Shell } from '../components/Shell'
 import { renderMarkdown } from '../lib/markdown'
+import { LINKS } from '../lib/links'
 
 interface Release {
   tag_name: string
@@ -9,6 +10,9 @@ interface Release {
   body: string
   html_url: string
 }
+
+const API = 'https://api.github.com/repos/Haris357/Layer-releases/releases'
+const CACHE_KEY = 'layer_releases_cache'
 
 function formatDate(iso: string): string {
   if (!iso) return ''
@@ -19,17 +23,50 @@ function formatDate(iso: string): string {
   })
 }
 
+function readCache(): Release[] | null {
+  try {
+    const raw = localStorage.getItem(CACHE_KEY)
+    return raw ? (JSON.parse(raw) as Release[]) : null
+  } catch {
+    return null
+  }
+}
+
 export function Changelog() {
-  const [items, setItems] = useState<Release[] | null>(null)
+  // Seed from the last good fetch so the page has something instantly, even
+  // if GitHub is slow or unreachable this time.
+  const [items, setItems] = useState<Release[] | null>(() => readCache())
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    fetch(
-      'https://api.github.com/repos/Haris357/Layer-releases/releases',
-    )
+    // Bail out of a hung request instead of spinning forever.
+    const ctrl = new AbortController()
+    const timeout = window.setTimeout(() => ctrl.abort(), 8000)
+
+    fetch(API, { signal: ctrl.signal })
       .then((r) => (r.ok ? r.json() : Promise.reject()))
-      .then((data: Release[]) => setItems(data))
-      .catch(() => setError(true))
+      .then((data: Release[]) => {
+        setItems(data)
+        setError(false)
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify(data))
+        } catch {
+          /* storage full / blocked — fine, just won't cache */
+        }
+      })
+      .catch(() => {
+        // Couldn't refresh. If we have nothing cached to show, flag the error.
+        setItems((cur) => {
+          if (!cur) setError(true)
+          return cur
+        })
+      })
+      .finally(() => window.clearTimeout(timeout))
+
+    return () => {
+      window.clearTimeout(timeout)
+      ctrl.abort()
+    }
   }, [])
 
   return (
@@ -49,7 +86,14 @@ export function Changelog() {
 
         {error && (
           <div className="ch-state">
-            Couldn’t reach GitHub right now. Try again in a moment.
+            <p>Couldn’t reach GitHub right now.</p>
+            <p style={{ marginTop: 10 }}>
+              You can view every release directly on{' '}
+              <a href={LINKS.releasesPage} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              .
+            </p>
           </div>
         )}
 

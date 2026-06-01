@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Shell } from '../components/Shell'
+import { DownloadCount } from '../components/DownloadCount'
 
 interface Section {
   eyebrow: string
@@ -53,12 +54,52 @@ export function Demo() {
   return (
     <Shell scroll>
       <div className="demo2">
-        <header className="demo-hero">
-          <div className="label">SEE IT IN MOTION</div>
-          <h1 className="display">Layer, in motion.</h1>
+        <header className="demo-hero demo-intro">
+          <div className="label">MEET LAYER</div>
+          <h1 className="display">widgets that live on your desktop.</h1>
           <p className="lead">
-            A quiet layer of widgets that lives on your desktop. Watch a
-            quick walkthrough — then jump into the bits below.
+            Layer drops notes, clocks, weather and dozens of widgets right
+            onto your desktop — sitting quietly behind your apps until you need
+            them. Summon it with a hotkey, arrange your canvas, make it yours.
+          </p>
+          <Link className="demo-dl" to="/download" style={{ marginTop: 6 }}>
+            Download for Windows
+          </Link>
+          <DownloadCount />
+
+          <div className="hero-pills">
+            {[
+              'Notes',
+              'Weather',
+              'Now Playing',
+              'Clipboard',
+              'Calendar',
+              'Shelf',
+              'Pomodoro',
+              'Greeting',
+            ].map((p) => (
+              <span key={p} className="pill">
+                {p}
+              </span>
+            ))}
+            <span className="pill pill-more">+16 more</span>
+          </div>
+
+          <a className="scroll-cue" href="#in-motion">
+            scroll
+            <span className="scroll-arrow">↓</span>
+          </a>
+        </header>
+
+        <section
+          id="in-motion"
+          className="demo-showcase"
+          style={{ marginTop: 4 }}
+        >
+          <div className="label">SEE IT IN MOTION</div>
+          <h2 className="display sm">Layer, in motion.</h2>
+          <p className="lead">
+            A quick walkthrough — then jump into the bits below.
           </p>
           <div className="demo-hero-video">
             <video
@@ -69,7 +110,7 @@ export function Demo() {
               preload="metadata"
             />
           </div>
-        </header>
+        </section>
 
         <div className="demo-sections">
           {SECTIONS.map((s) => (
@@ -104,28 +145,62 @@ export function Demo() {
           ))}
         </div>
 
-        <section className="demo-showcase">
+        <section className="demo-showcase ss-section">
           <div className="label">EVEN WHEN YOU STEP AWAY</div>
           <h2 className="display sm">A screensaver, too.</h2>
           <p className="lead">
             Leave your machine for a bit and Layer becomes a calm, full-screen
-            screensaver — a big clock, the date, your local weather, and
-            whatever’s playing, drifting over a soft ambient backdrop. It sets
-            itself up automatically, and a tap of any key brings you back.
+            screensaver. Pick the mood — three styles, each setting itself up
+            automatically, and a tap of any key brings you back.
           </p>
-          <div className="demo-shot">
-            <img
-              src="/screensaver.png"
-              alt="The Layer screensaver — clock, date, local weather and now playing over an ambient backdrop"
-              loading="lazy"
-            />
+
+          <div className="demo-sections">
+            {[
+              {
+                src: '/screensaver.png',
+                eyebrow: 'AMBIENT',
+                title: 'Everything, at a glance.',
+                body: 'Clock, date, your local weather and whatever’s playing, drifting gently over a soft aurora.',
+              },
+              {
+                src: '/screensaver-minimal.png',
+                eyebrow: 'MINIMAL',
+                title: 'Just the time.',
+                body: 'Flat black and one big, ultra‑thin clock anchored in the corner. Nothing to pull your eye.',
+                reverse: true,
+              },
+              {
+                src: '/screensaver-quote.png',
+                eyebrow: 'QUOTE',
+                title: 'A line to reset to.',
+                body: 'A calm, rotating quote takes the stage, with the time resting quietly above it.',
+              },
+            ].map((s) => (
+              <section
+                key={s.eyebrow}
+                className={`demo-row ${s.reverse ? 'reverse' : ''}`}
+              >
+                <div className="demo-text">
+                  <div className="label">{s.eyebrow}</div>
+                  <h2>{s.title}</h2>
+                  <p>{s.body}</p>
+                </div>
+                <div className="demo-media">
+                  <img
+                    src={s.src}
+                    alt={`The Layer ${s.eyebrow.toLowerCase()} screensaver style`}
+                    loading="lazy"
+                  />
+                </div>
+              </section>
+            ))}
           </div>
         </section>
 
         <div className="demo-cta">
           <h2 className="display sm">Yours in a minute.</h2>
-          <p className="lead">Free, no account, Windows 10 &amp; 11.</p>
-          <Link className="demo-dl" to="/?download=1">
+          <p className="lead">For Windows 10 &amp; 11.</p>
+          <Link className="demo-dl" to="/download">
             Download Layer
           </Link>
         </div>

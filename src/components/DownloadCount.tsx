@@ -3,6 +3,17 @@ import { onSnapshot } from 'firebase/firestore'
 import { DownloadIcon } from './icons'
 import { downloadsDoc } from '../lib/firebase'
 
+// Compact, capped formatting: 1000 → 1k, 1500 → 1.5k, 1_200_000 → 1.2m.
+// Under 1000 stays exact.
+function compact(n: number): string {
+  return new Intl.NumberFormat('en-US', {
+    notation: 'compact',
+    maximumFractionDigits: 1,
+  })
+    .format(n)
+    .toLowerCase()
+}
+
 export function DownloadCount() {
   const [count, setCount] = useState<number | null>(null)
   const [shown, setShown] = useState(0)
@@ -48,7 +59,7 @@ export function DownloadCount() {
       <span className="dot" />
       <DownloadIcon size={13} />
       <span>
-        <strong>{shown.toLocaleString()}</strong> downloads
+        <strong>{compact(shown)}</strong> downloads
       </span>
     </div>
   )

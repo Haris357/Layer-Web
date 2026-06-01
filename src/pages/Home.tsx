@@ -106,12 +106,12 @@ export function Home() {
   return (
     <Shell>
       <div className="hero">
-        <div className="label">MEET LAYER</div>
-        <h1 className="display">widgets that live on your desktop.</h1>
+        <div className="label">DOWNLOAD LAYER</div>
+        <h1 className="display">get Layer for Windows.</h1>
         <p className="lead">
-          Layer drops notes, clocks, weather and dozens of widgets right onto
-          your desktop — sitting quietly behind your apps until you need them.
-          Summon it with a hotkey, arrange your canvas, make it yours.
+          Drop your email and the installer starts right away. It sets up in a
+          few seconds, Layer appears on your desktop, and it keeps itself up to
+          date from then on.
         </p>
 
         <div className="signup">
@@ -154,7 +154,7 @@ export function Home() {
           <div className={`note ${msg?.kind ?? ''}`}>
             {msg
               ? msg.text
-              : 'for Windows 10 & 11 · free · no account needed'}
+              : 'for Windows 10 & 11'}
           </div>
         )}
 
@@ -168,9 +168,51 @@ export function Home() {
             browse spaces
           </Link>
           <span style={{ margin: '0 8px' }}>·</span>
-          <Link to="/demo" style={{ color: 'var(--muted)', fontWeight: 500 }}>
-            watch a quick demo
+          <Link to="/" style={{ color: 'var(--muted)', fontWeight: 500 }}>
+            see it in motion
           </Link>
+        </div>
+
+        <div className="dl-notes">
+          <div className="dl-note">
+            <div className="label">WHAT TO EXPECT</div>
+            <p>
+              The installer is small and sets up in a few seconds — no setup
+              wizard to click through. Layer launches straight onto your
+              desktop, you can have it start with Windows from Settings, and it
+              keeps itself up to date in the background. Everything lives in
+              your own <code>%AppData%\Layer</code> folder, and it uninstalls
+              cleanly whenever you want.
+            </p>
+          </div>
+
+          <div className="dl-note">
+            <div className="label">A NOTE ON ANTIVIRUS</div>
+            <p>
+              Heads up: a couple of antivirus engines may flag Layer as a
+              false positive. It isn’t malware. They react to two things Layer
+              genuinely does to work — a global hotkey (so quick‑capture works
+              anywhere) and a transparent full‑screen desktop overlay (which is
+              literally what Layer is). Microsoft Defender and roughly 68 of 70
+              engines on VirusTotal pass it clean.
+            </p>
+            <p>
+              Layer runs as a normal app — no drivers, no services, no
+              system‑level changes. It only talks to the public APIs for the
+              features you use (weather, currency rates, the Space gallery, and
+              GitHub for updates), and it has no telemetry or tracking. The full
+              detail is on the{' '}
+              <a
+                href={LINKS.repo}
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: 'var(--ink)', fontWeight: 600 }}
+              >
+                releases page
+              </a>
+              .
+            </p>
+          </div>
         </div>
       </div>
     </Shell>
