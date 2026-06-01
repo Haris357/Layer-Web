@@ -36,7 +36,19 @@ module.exports = async (req, res) => {
     /* parses stays false */
   }
 
+  // Actually try to initialize the Admin SDK so we see the real failure
+  // reason (Admin error messages are generic — they don't leak the key).
+  let adminInit = false
+  let adminError = null
+  try {
+    require('./_firebase-admin').getAuth()
+    adminInit = true
+  } catch (e) {
+    adminError = String((e && e.message) || e).slice(0, 200)
+  }
+
   res.status(200).json({
+    build: 'diag-2',
     hasServiceAccount: !!raw,
     rawLength: raw.length,
     startsWithBrace: trimmed.startsWith('{'),
@@ -46,5 +58,7 @@ module.exports = async (req, res) => {
     hasPrivateKey,
     privateKeyLooksValid,
     hasPepper: !!process.env.OTP_PEPPER,
+    adminInit,
+    adminError,
   })
 }
