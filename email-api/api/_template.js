@@ -111,4 +111,78 @@ function welcomeEmail() {
 </html>`
 }
 
-module.exports = { welcomeEmail }
+// Sign-in code email for Cloud Sync — same visual shell as the welcome mail.
+function otpEmail(code) {
+  const font =
+    "-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',Roboto,Helvetica,Arial,sans-serif"
+  const ink = '#111111'
+  const muted = '#66666b'
+  const faint = '#9a9aa0'
+  const line = '#ececec'
+
+  return `<!doctype html>
+<html>
+  <body style="margin:0;padding:0;background:#f4f4f5;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0"
+      style="background:#f4f4f5;padding:40px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="540" cellpadding="0" cellspacing="0"
+            style="max-width:540px;width:100%;background:#ffffff;border:1px solid ${line};
+            border-radius:18px;overflow:hidden;">
+            <tr>
+              <td style="padding:40px 44px 8px;font-family:${font};">
+                <div style="font-size:19px;font-weight:700;letter-spacing:-0.6px;color:${ink};">
+                  Layer
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:14px 44px 0;font-family:${font};">
+                <div style="font-size:26px;font-weight:700;letter-spacing:-1.1px;color:${ink};">
+                  Your sign-in code
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:16px 44px 0;font-family:${font};">
+                <p style="margin:0;font-size:15px;line-height:1.6;color:${muted};">
+                  Enter this code in Layer to turn on Cloud Sync:
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:22px 44px 0;font-family:${font};">
+                <div style="display:inline-block;background:#f6f6f7;border:1px solid ${line};
+                  border-radius:12px;padding:18px 28px;font-size:34px;font-weight:700;
+                  letter-spacing:10px;color:${ink};font-family:'SFMono-Regular',Consolas,
+                  'Liberation Mono',Menlo,monospace;">
+                  ${code}
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:22px 44px 0;font-family:${font};">
+                <p style="margin:0;font-size:14px;line-height:1.6;color:${muted};">
+                  This code expires in 10 minutes. If you didn't request it, you
+                  can safely ignore this email — nothing will change.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:34px 44px 40px;font-family:${font};">
+                <p style="margin:0;font-size:12px;line-height:1.5;color:${faint};">
+                  Sent by Layer because someone entered this address to enable
+                  Cloud Sync. — made with care by Haris.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`
+}
+
+module.exports = { welcomeEmail, otpEmail }
