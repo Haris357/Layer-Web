@@ -17,8 +17,15 @@ function ensure() {
     if (!json.startsWith('{')) {
       json = Buffer.from(json, 'base64').toString('utf8')
     }
+    const cred = JSON.parse(json)
+    // When the JSON is pasted into an env UI the private key's line breaks
+    // often arrive as the literal two-character sequence "\n" instead of real
+    // newlines, which makes the PEM invalid. Normalize them back.
+    if (typeof cred.private_key === 'string') {
+      cred.private_key = cred.private_key.replace(/\\n/g, '\n')
+    }
     admin.initializeApp({
-      credential: admin.cert(JSON.parse(json)),
+      credential: admin.cert(cred),
     })
   }
   initialized = true
