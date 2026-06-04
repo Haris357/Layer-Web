@@ -82,6 +82,7 @@ export function Shell({
         <div className="foot-right">
           <Link to="/changelog">Changelog</Link>
           <Link to="/terms">Terms</Link>
+          <Link to="/privacy">Privacy</Link>
           <Link to="/docs">Docs</Link>
         </div>
       </footer>
