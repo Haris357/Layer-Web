@@ -48,12 +48,7 @@ export function Privacy() {
         <p className="lead">
           Plain and honest — your data stays yours.
         </p>
-        <p
-          className="note"
-          style={{ marginTop: -8, marginBottom: 8 }}
-        >
-          Last updated: June 2026
-        </p>
+        <p className="doc-note">Last updated: June 2026</p>
         <div className="sections">
           {SECTIONS.map((s) => (
             <div className="section" key={s.h}>
