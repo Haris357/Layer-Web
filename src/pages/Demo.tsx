@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Shell } from '../components/Shell'
 import { DownloadCount } from '../components/DownloadCount'
+import { Carousel } from '../components/Carousel'
 
 interface Section {
   eyebrow: string
@@ -144,6 +145,15 @@ export function Demo() {
             </section>
           ))}
         </div>
+
+        <section className="demo-showcase">
+          <div className="label">SNAPSHOTS</div>
+          <h2 className="display sm">A closer look.</h2>
+          <p className="lead">
+            A few desktops built with Layer — widgets, clocks and all.
+          </p>
+          <Carousel />
+        </section>
 
         <section className="demo-showcase ss-section">
           <div className="label">EVEN WHEN YOU STEP AWAY</div>
