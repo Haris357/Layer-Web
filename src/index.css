@@ -101,6 +101,7 @@ a {
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 100px 28px;
 }
 /* Auto block-margins center the content vertically but, unlike
@@ -179,21 +180,24 @@ a {
 }
 
 .display {
-  font-size: 50px;
+  /* Fluid so the heading always fits the viewport (never overflows on phones). */
+  font-size: clamp(29px, 7.5vw, 50px);
   font-weight: 700;
   letter-spacing: -2.1px;
   line-height: 1.05;
   color: var(--ink);
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 .display.sm {
-  font-size: 38px;
+  font-size: clamp(24px, 6vw, 38px);
   letter-spacing: -1.6px;
 }
 
 .lead {
   margin: 22px auto 0;
   max-width: 540px;
-  font-size: 20px;
+  font-size: clamp(15px, 4.2vw, 20px);
   line-height: 1.5;
   color: var(--muted);
   font-weight: 400;
@@ -210,11 +214,14 @@ a {
 .signup {
   margin-top: 30px;
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
 }
 .signup input {
-  width: 280px;
+  flex: 1 1 240px;
+  min-width: 0;
+  max-width: 320px;
   height: 52px;
   padding: 0 18px;
   font-family: inherit;
@@ -766,6 +773,7 @@ kbd {
 .content-scroll {
   display: block;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 92px 28px 84px;
   scroll-behavior: smooth;
 }
@@ -1220,6 +1228,15 @@ kbd {
     top: 16px;
     left: 18px;
     font-size: 16px;
+  }
+  .topnav {
+    top: 14px;
+    right: 16px;
+    gap: 12px;
+    font-size: 13px;
+  }
+  .topnav .topnav-dl {
+    padding: 7px 13px;
   }
   .content {
     padding: 80px 20px 96px;
