@@ -142,24 +142,36 @@ function storeAnnouncementEmail() {
             <tr>
               <td style="padding:14px 44px 0;font-family:${font};">
                 <div style="font-size:26px;font-weight:700;letter-spacing:-1.1px;color:${ink};">
-                  Layer is now on the Microsoft Store&nbsp;🎉
+                  A new Layer — now on the Microsoft Store&nbsp;🎉
                 </div>
               </td>
             </tr>
             <tr>
               <td style="padding:16px 44px 0;font-family:${font};">
+                <p style="margin:0 0 12px;font-size:15px;line-height:1.6;color:${muted};">
+                  Hey — Haris here, with two bits of good news. First, there's a
+                  fresh Layer update with a couple of things people asked for:
+                </p>
+                <p style="margin:0 0 6px;font-size:15px;line-height:1.6;color:${muted};">
+                  🎧&nbsp;&nbsp;<strong style="color:${ink};">Audio switcher
+                  widget</strong> — flip between headphones, speakers and mics
+                  in a single click.
+                </p>
                 <p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:${muted};">
-                  Hey — Haris here. Quick bit of good news: Layer is now
-                  published on the <strong style="color:${ink};">Microsoft
-                  Store</strong>. That means it's Microsoft-verified, so there
-                  are no more SmartScreen or antivirus false-positive warnings —
-                  just one click to install, and it stays up to date through the
-                  Store automatically.
+                  🕐&nbsp;&nbsp;<strong style="color:${ink};">A clock that
+                  scales</strong> — resize the clock widget and the time resizes
+                  with it.
+                </p>
+                <p style="margin:0 0 14px;font-size:15px;line-height:1.6;color:${muted};">
+                  And second — Layer is now on the
+                  <strong style="color:${ink};">Microsoft Store</strong>. It's
+                  Microsoft-verified, so no more SmartScreen or antivirus
+                  false-positive warnings — just one click to install, and it
+                  stays up to date through the Store automatically.
                 </p>
                 <p style="margin:0;font-size:15px;line-height:1.6;color:${muted};">
-                  Already using Layer? You're all set — nothing to do, keep
-                  using it as you are. If you ever reinstall or want it on
-                  another PC, the Store is now the easiest way.
+                  Already using Layer? Update from the Store (or it'll update
+                  itself there) and you're all set — keep enjoying it. 💙
                 </p>
               </td>
             </tr>

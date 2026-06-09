@@ -16,7 +16,7 @@ const nodemailer = require('nodemailer')
 const { getDb } = require('./api/_firebase-admin')
 const { storeAnnouncementEmail } = require('./api/_template')
 
-const SUBJECT = 'Layer is now on the Microsoft Store'
+const SUBJECT = 'A new Layer — now on the Microsoft Store'
 const SEND = process.argv.includes('--send')
 const DELAY_MS = 1200 // gentle pacing — stays within limits, avoids spam flags
 
