@@ -711,6 +711,83 @@ kbd {
   box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.35);
 }
 
+/* ---------- Microsoft Store button (primary CTA) ---------- */
+.store-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--ink);
+  color: #fff;
+  padding: 12px 26px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.store-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -12px rgba(0, 0, 0, 0.4);
+}
+.store-btn .ms-logo {
+  display: grid;
+  grid-template-columns: 9px 9px;
+  grid-template-rows: 9px 9px;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.store-btn .ms-logo i {
+  width: 9px;
+  height: 9px;
+  border-radius: 1px;
+}
+.store-btn .ms-logo i:nth-child(1) {
+  background: #f25022;
+}
+.store-btn .ms-logo i:nth-child(2) {
+  background: #7fba00;
+}
+.store-btn .ms-logo i:nth-child(3) {
+  background: #00a4ef;
+}
+.store-btn .ms-logo i:nth-child(4) {
+  background: #ffb900;
+}
+.store-btn .st {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.15;
+  font-weight: 600;
+  font-size: 15px;
+}
+.store-btn .st small {
+  font-size: 10px;
+  font-weight: 500;
+  opacity: 0.72;
+}
+
+/* "or download directly" line under the Store button */
+.dl-or {
+  margin-top: 15px;
+  font-size: 12.5px;
+  color: var(--faint);
+}
+
+/* secondary direct-download link on the demo hero */
+.demo-dl-alt {
+  display: inline-block;
+  margin-top: 13px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.demo-dl-alt:hover {
+  color: var(--ink);
+}
+
 /* Top-center new-release toast. */
 .rel-toast {
   position: fixed;

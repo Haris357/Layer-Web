@@ -106,13 +106,34 @@ export function Home() {
   return (
     <Shell>
       <div className="hero">
-        <div className="label">DOWNLOAD LAYER</div>
+        <div className="label">GET LAYER</div>
         <h1 className="display">get Layer for Windows.</h1>
         <p className="lead">
-          Drop your email and the installer starts right away. It sets up in a
-          few seconds, Layer appears on your desktop, and it keeps itself up to
-          date from then on.
+          Layer is on the Microsoft Store — one click to install, automatic
+          updates, and Microsoft-verified, so there are no SmartScreen or
+          antivirus warnings. Prefer a plain installer? Grab it directly below.
         </p>
+
+        <a
+          className="store-btn"
+          href={LINKS.store}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => void countDownloadOnce()}
+        >
+          <span className="ms-logo">
+            <i />
+            <i />
+            <i />
+            <i />
+          </span>
+          <span className="st">
+            <small>Get it from</small>
+            Microsoft Store
+          </span>
+        </a>
+
+        <div className="dl-or">or download the installer directly</div>
 
         <div className="signup">
           <input

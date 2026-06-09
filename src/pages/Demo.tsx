@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Shell } from '../components/Shell'
 import { DownloadCount } from '../components/DownloadCount'
 import { Carousel } from '../components/Carousel'
+import { LINKS } from '../lib/links'
 
 interface Section {
   eyebrow: string
@@ -63,8 +64,26 @@ export function Demo() {
             onto your desktop — sitting quietly behind your apps until you need
             them. Summon it with a hotkey, arrange your canvas, make it yours.
           </p>
-          <Link className="demo-dl" to="/download" style={{ marginTop: 6 }}>
-            Download for Windows
+          <a
+            className="store-btn"
+            href={LINKS.store}
+            target="_blank"
+            rel="noreferrer"
+            style={{ marginTop: 6 }}
+          >
+            <span className="ms-logo">
+              <i />
+              <i />
+              <i />
+              <i />
+            </span>
+            <span className="st">
+              <small>Get it from</small>
+              Microsoft Store
+            </span>
+          </a>
+          <Link className="demo-dl-alt" to="/download">
+            or download directly →
           </Link>
           <DownloadCount />
 

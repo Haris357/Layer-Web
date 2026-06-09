@@ -11,6 +11,26 @@ OTP codes are stored (hashed) in Firestore `otps/{sha256(email)}` and are
 single-use, expire in 10 minutes, capped at 5 attempts, and rate-limited
 (≤5/hour, 60s cooldown). The Admin SDK runs server-side only.
 
+## Broadcast an announcement
+
+`broadcast.cjs` emails the Store-availability announcement
+(`storeAnnouncementEmail` in `_template.js`) to every address in the Firestore
+`emails` collection. Run it locally with the same env vars the deployed function
+uses:
+
+```bash
+cd email-api
+# DRY RUN first — prints recipient count + a sample, sends nothing:
+node broadcast.cjs
+# then send for real:
+node broadcast.cjs --send
+```
+
+Set `SMTP_USER`, `SMTP_PASS`, and `FIREBASE_SERVICE_ACCOUNT` in your shell
+(same values as Vercel). Gmail free accounts cap at ~500 recipients/day — if the
+list is larger, send in batches across days (per-recipient failures are logged,
+not fatal).
+
 ## Deploy
 
 1. Go to [vercel.com](https://vercel.com) → **Add New → Project** → import the
