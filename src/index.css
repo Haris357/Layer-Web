@@ -479,6 +479,21 @@ kbd {
     transform: translateY(4px);
   }
 }
+
+/* On phones the hero content is tall enough to collide with the absolutely
+   positioned scroll cue, so let the cue sit in normal flow below the pills. */
+@media (max-width: 640px) {
+  .demo-intro {
+    min-height: auto;
+    padding: 24px 0 8px;
+  }
+  .scroll-cue {
+    position: static;
+    transform: none;
+    margin-top: 26px;
+  }
+}
+
 .demo-hero .display {
   margin-top: 18px;
 }

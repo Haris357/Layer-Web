@@ -120,6 +120,7 @@ export function Home() {
           target="_blank"
           rel="noreferrer"
           onClick={() => void countDownloadOnce()}
+          style={{ marginTop: 26 }}
         >
           <span className="ms-logo">
             <i />
