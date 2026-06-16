@@ -789,6 +789,28 @@ kbd {
   color: var(--faint);
 }
 
+/* architecture hint under the direct download (ARM64 option) */
+.dl-arch {
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: var(--faint);
+}
+.dl-arch button {
+  font: inherit;
+  color: var(--ink);
+  font-weight: 600;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.dl-arch button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
 /* secondary direct-download link on the demo hero */
 .demo-dl-alt {
   display: inline-block;

@@ -38,7 +38,7 @@ export function Home() {
   const valid = isValidEmail(email)
   const suggestion = valid ? null : suggestEmail(email)
 
-  const onDownload = async () => {
+  const onDownload = async (arch: 'x64' | 'arm64' = 'x64') => {
     const value = email.trim()
     if (!isValidEmail(value)) {
       setMsg({ kind: 'error', text: 'Please enter a valid email address.' })
@@ -84,6 +84,7 @@ export function Home() {
         email: value,
         createdAt: serverTimestamp(),
         platform: 'windows',
+        arch,
         source: 'website',
       })
     } catch {
@@ -94,12 +95,16 @@ export function Home() {
     // never the same person twice). Best effort — fire and forget.
     void countDownloadOnce()
 
-    // Start the installer download.
-    window.location.href = LINKS.download
+    // Start the installer download (native ARM64 build for ARM PCs, else x64).
+    window.location.href =
+      arch === 'arm64' ? LINKS.downloadArm64 : LINKS.download
     setBusy(false)
     setMsg({
       kind: 'ok',
-      text: 'Your download is starting — check your inbox for a hello from us.',
+      text:
+        arch === 'arm64'
+          ? 'Your ARM64 download is starting — check your inbox for a hello from us.'
+          : 'Your download is starting — check your inbox for a hello from us.',
     })
   }
 
@@ -149,10 +154,21 @@ export function Home() {
           />
           <button
             type="button"
-            onClick={onDownload}
+            onClick={() => onDownload('x64')}
             disabled={busy || !valid}
           >
             {busy ? 'preparing…' : 'download'}
+          </button>
+        </div>
+
+        <div className="dl-arch">
+          <span>Intel/AMD (x64) by default. On a Windows ARM PC? </span>
+          <button
+            type="button"
+            onClick={() => onDownload('arm64')}
+            disabled={busy || !valid}
+          >
+            Get the ARM64 build
           </button>
         </div>
 
