@@ -4,6 +4,8 @@ import {
   doc,
   increment,
   setDoc,
+  updateDoc,
+  serverTimestamp,
 } from 'firebase/firestore'
 import { getAnalytics, isSupported } from 'firebase/analytics'
 
@@ -36,6 +38,22 @@ export async function countDownloadOnce(): Promise<void> {
   } catch {
     /* ignore — a missed count must never break the download */
   }
+}
+
+// Flip the unsubscribe flag on someone's download-list entry. The doc id is
+// the encoded lowercased email (same key the signup uses), so the unsubscribe
+// link can address it directly. updateDoc only touches an EXISTING entry — if
+// the address was never on the list it throws, which the caller treats as a
+// no-op success (we never reveal who is or isn't on the list).
+export async function setEmailUnsubscribed(
+  email: string,
+  unsubscribed: boolean,
+): Promise<void> {
+  const id = encodeURIComponent(email.trim().toLowerCase())
+  await updateDoc(doc(db, 'emails', id), {
+    unsubscribed,
+    unsubscribedAt: serverTimestamp(),
+  })
 }
 
 // Analytics only loads in browsers that support it; never block on it.

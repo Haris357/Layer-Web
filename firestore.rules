@@ -10,7 +10,13 @@ service cloud.firestore {
                     && request.resource.data.email.size() < 254
                     && request.resource.data.email
                          .matches('^[^@\\s]+@[^@\\s]+[.][a-zA-Z]{2,}$');
-      allow read, update, delete: if false;
+      // Unsubscribe / resubscribe: anyone with the link may flip ONLY the
+      // unsubscribe flag (+ its timestamp) on an existing entry — no other
+      // field can be read or altered.
+      allow update: if request.resource.data.diff(resource.data)
+                         .affectedKeys().hasOnly(['unsubscribed', 'unsubscribedAt'])
+                    && request.resource.data.unsubscribed is bool;
+      allow read, delete: if false;
     }
 
     // Public download counter — one shared doc the site reads live and
